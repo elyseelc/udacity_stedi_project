@@ -1,0 +1,1 @@
+Python script that sanitises accelerometer data creating accelerometer_trusted
