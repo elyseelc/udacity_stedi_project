@@ -3,8 +3,8 @@ Steps to follow:
 DONE 1. Create glue jobs for the customer and accelerometer landing data.
 DONE 2. Query the tables created above and screenshot output for submission.
 
-3. Fix customers_trusted script so that it properly filters out untrusted customers. 
-4. Query customers_trusted and take screenshot of output for submission.
+DONE? 3. Fix customers_trusted script so that it properly filters out untrusted customers. 
+DONE 4. Query customers_trusted and take screenshot of output for submission.
 
 5. Create/fix a glue job for step_trainer_trusted.
 6. Create machine_learning_curated glue table.
