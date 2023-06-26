@@ -1,6 +1,5 @@
 Python script that sanitises customer_trusted and creates the Glue table customers_curated
 
-# This script should be okay but will need to be re-run once customers_trusted has been sorted & fixed
 
 from pyspark.context import SparkContext
 from awsglue.context import GlueContext
