@@ -24,3 +24,11 @@ customer_trusted query results:
 
 SQL Query:
 
+
+
+
+customer_trusted query results:
+SQL Query: **select * from customer_trusted limit 10;**
+
+
+![customers_trusted_query](https://github.com/elyseelc/udacity_stedi_project/assets/128007448/87215c3c-616d-4507-823d-ccda30ba0b12)
