@@ -1,2 +1,37 @@
 # Python script that reads the Step Trainer data and populates a step_trainer_trusted
 
+import sys
+from awsglue.transforms import *
+from awsglue.utils import getResolvedOptions
+from pyspark.context import SparkContext
+from awsglue.context import GlueContext
+from awsglue.job import Job
+
+args = getResolvedOptions(sys.argv, ['JOB_NAME'])
+
+sc = SparkContext()
+glueContext = GlueContext(sc)
+spark = glueContext.spark_session
+job = Job(glueContext)
+job.init(args['JOB_NAME'], args)
+
+# Load step_trainer data from the landing zone
+step_trainer_landing_dyf = glueContext.create_dynamic_frame.from_catalog(database = "stediproject_database2", 
+table_name = "stediproject_steptrainerlanding1")
+
+# Load customers_curated data
+customers_curated_dyf = glueContext.create_dynamic_frame.from_catalog(database = "stediproject_database2", 
+table_name = "customers_curated")
+
+# Join step_trainer_landing with customers_curated on serialNumber
+step_trainer_trusted_dyf = Join.apply(step_trainer_landing_dyf, customers_curated_dyf, 'serialNumber', 'serialNumber')
+
+# Create a Glue table for the curated step_trainer data
+glueContext.write_dynamic_frame.from_options(
+    frame = step_trainer_trusted_dyf, 
+    connection_type = "s3", 
+    connection_options = {"path": "s3://stediproject-steptrainerlanding1/step_trainer_trusted/"}, 
+    format = "json"
+)
+
+job.commit()
